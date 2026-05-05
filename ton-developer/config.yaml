@@ -1,0 +1,60 @@
+# TON Developer Profile for Hermes Agent
+# Forked from Hermes Agent - https://github.com/NousResearch/hermes-agent
+
+model:
+  default: openrouter/NousResearch/Hermes-3-Llama-3.1-405B
+  provider: openrouter
+
+agent:
+  max_turns: 90
+  tool_use_enforcement: false
+
+terminal:
+  backend: local
+  timeout: 300
+
+display:
+  skin: ton-blue
+  tool_progress: true
+  show_reasoning: medium
+  show_cost: true
+
+# TON-specific environment variables
+env:
+  # TON Center API (public testnet)
+  TONCENTER_API_KEY: "${TONCENTER_API_KEY}"
+  TONCENTER_BASE_URL: "https://testnet.toncenter.com/api/v2/"
+  # TON CLI project root (auto-detected)
+  TONCLI_PROJECT_ROOT: "${TONCLI_PROJECT_ROOT}"
+
+toolsets:
+  - web
+  - terminal
+  - file
+  - code_execution
+  - vision
+  - delegation
+  - skills
+  - memory
+  - session_search
+
+# Pre-loaded skills for TON development
+skills:
+  - ton-smart-contract
+  - ton-blockchain
+  - ton-deployment
+
+memory:
+  memory_enabled: true
+  user_profile_enabled: true
+  provider: local
+
+mcp_servers:
+  ton:
+    command: python3
+    args:
+      - /root/.hermes/profiles/ton-developer/ton_mcp_server.py
+    env:
+      TONCENTER_API_KEY: ${TONCENTER_API_KEY}
+      TON_DEFAULT_NETWORK: testnet
+    timeout: 120
