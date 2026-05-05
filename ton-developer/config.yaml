@@ -21,11 +21,11 @@ display:
 
 # TON-specific environment variables
 env:
-  # TON Center API (public testnet)
-  TONCENTER_API_KEY: "${TONCENTER_API_KEY}"
-  TONCENTER_BASE_URL: "https://testnet.toncenter.com/api/v2/"
-  # TON CLI project root (auto-detected)
-  TONCLI_PROJECT_ROOT: "${TONCLI_PROJECT_ROOT}"
+  # TON API (TonAPI.io - https://tonconsole.com adresinden API key al)
+  TONAPI_API_KEY: "${TONAPI_API_KEY}"
+  TONAPI_BASE_URL: "https://tonapi.io"
+  # Testnet için
+  TON_DEFAULT_NETWORK: testnet
 
 toolsets:
   - web
@@ -53,8 +53,8 @@ mcp_servers:
   ton:
     command: python3
     args:
-      - /root/.hermes/profiles/ton-developer/ton_mcp_server.py
+      - ${HERMES_PROFILE_DIR}/ton_mcp_server.py
     env:
-      TONCENTER_API_KEY: ${TONCENTER_API_KEY}
+      TONAPI_API_KEY: ${TONAPI_API_KEY}
       TON_DEFAULT_NETWORK: testnet
     timeout: 120
